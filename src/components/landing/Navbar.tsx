@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Zap, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -46,8 +47,8 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="glow" size="default">
-              Scan a Prompt
+            <Button variant="glow" size="default" asChild>
+              <Link to="/auth">Scan a Prompt</Link>
             </Button>
           </div>
 
@@ -75,8 +76,8 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <Button variant="glow" size="default" className="mt-2">
-                Scan a Prompt
+              <Button variant="glow" size="default" className="mt-2" asChild>
+                <Link to="/auth">Scan a Prompt</Link>
               </Button>
             </div>
           </div>
