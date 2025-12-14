@@ -38,10 +38,20 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="col-span-2">
-            <a href="#" className="flex items-center gap-2 mb-4">
-              <Zap className="w-6 h-6 text-primary" />
+            <a href="#" className="group flex items-center gap-2 mb-4">
+              <Zap className="w-6 h-6 text-primary animate-[float_3s_ease-in-out_infinite] group-hover:animate-[spin_0.5s_ease-in-out]" />
               <span className="text-lg font-bold tracking-tight">
-                Prompt<span className="text-primary">Pulse</span>
+                <span className="inline-block animate-[float_2.5s_ease-in-out_infinite_0.1s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite]">P</span>
+                <span className="inline-block animate-[float_2.8s_ease-in-out_infinite_0.2s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.05s]">r</span>
+                <span className="inline-block animate-[float_2.3s_ease-in-out_infinite_0.3s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.1s]">o</span>
+                <span className="inline-block animate-[float_2.6s_ease-in-out_infinite_0.4s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.15s]">m</span>
+                <span className="inline-block animate-[float_2.4s_ease-in-out_infinite_0.5s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.2s]">p</span>
+                <span className="inline-block animate-[float_2.7s_ease-in-out_infinite_0.6s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.25s]">t</span>
+                <span className="inline-block text-primary animate-[float_2.5s_ease-in-out_infinite_0.7s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.3s]">P</span>
+                <span className="inline-block text-primary animate-[float_2.9s_ease-in-out_infinite_0.8s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.35s]">u</span>
+                <span className="inline-block text-primary animate-[float_2.2s_ease-in-out_infinite_0.9s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.4s]">l</span>
+                <span className="inline-block text-primary animate-[float_2.6s_ease-in-out_infinite_1s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.45s]">s</span>
+                <span className="inline-block text-primary animate-[float_2.4s_ease-in-out_infinite_1.1s] group-hover:animate-[wiggle_0.3s_ease-in-out_infinite_0.5s]">e</span>
               </span>
             </a>
             <p className="text-sm text-muted-foreground max-w-xs mb-6">
