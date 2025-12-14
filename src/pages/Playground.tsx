@@ -160,20 +160,31 @@ const Playground = () => {
         </div>
       </main>
 
-      {/* Right Panel - Configuration */}
-      <aside className="w-80 bg-zinc-900/30 border-l border-white/5 flex flex-col">
+      {/* Right Panel - Improved Prompt Output */}
+      <aside className="w-96 bg-zinc-900/30 border-l border-white/5 flex flex-col">
         {/* Panel Header */}
         <header className="h-14 border-b border-white/5 flex items-center justify-between px-4">
           <div className="flex items-center gap-2">
-            <Settings className="w-4 h-4 text-zinc-500" />
-            <span className="text-sm font-medium text-zinc-300">Configuration</span>
+            <Sparkles className="w-4 h-4 text-purple-400" />
+            <span className="text-sm font-medium text-zinc-300">Improved Prompt</span>
           </div>
-          <button className="p-1 hover:bg-white/5 rounded transition-colors">
-            <MoreHorizontal className="w-4 h-4 text-zinc-500" />
-          </button>
         </header>
 
-        
+        {/* Improved Prompt Content */}
+        <div className="flex-1 p-4 overflow-auto">
+          <div className="h-full bg-zinc-900/50 rounded-xl border border-white/5 flex flex-col">
+            {/* Empty State */}
+            <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
+              <div className="w-12 h-12 rounded-full bg-zinc-800/50 flex items-center justify-center mb-4">
+                <Sparkles className="w-6 h-6 text-zinc-600" />
+              </div>
+              <h3 className="text-sm font-medium text-zinc-400 mb-2">No Analysis Yet</h3>
+              <p className="text-xs text-zinc-600 max-w-[200px]">
+                Write your prompt and click "Analyze Prompt" to get an optimized version here.
+              </p>
+            </div>
+          </div>
+        </div>
       </aside>
     </div>;
 };
