@@ -102,22 +102,11 @@ const Playground = () => {
       <main className="flex-1 flex flex-col min-w-0">
         {/* Editor Header */}
         <header className="h-14 border-b border-white/5 flex items-center justify-between px-6">
-          <div className="flex items-center gap-4">
-            <input type="text" value={promptTitle} onChange={e => setPromptTitle(e.target.value)} className="bg-transparent text-lg font-medium text-white border-none outline-none focus:ring-0 placeholder:text-zinc-600" placeholder="Untitled Prompt" />
-            <span className="px-2 py-0.5 text-xs font-mono bg-zinc-800 text-zinc-400 rounded">
-              v1.0
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-white hover:bg-white/5">
-              <History className="w-4 h-4 mr-2" />
-              History
-            </Button>
-            <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-white hover:bg-white/5">
-              <Save className="w-4 h-4 mr-2" />
-              Save
-            </Button>
-          </div>
+          <input type="text" value={promptTitle} onChange={e => setPromptTitle(e.target.value)} className="bg-transparent text-lg font-medium text-white border-none outline-none focus:ring-0 placeholder:text-zinc-600" placeholder="Untitled Prompt" />
+          <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-white hover:bg-white/5">
+            <Save className="w-4 h-4 mr-2" />
+            Save
+          </Button>
         </header>
 
         {/* Editor Body */}
