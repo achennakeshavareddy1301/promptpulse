@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { Play, Save, History, Settings, Variable, ChevronLeft, ChevronRight, Sparkles, User, Circle, MoreHorizontal, Plus } from "lucide-react";
+import { Play, Save, Sparkles, User, Circle, ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 const recentPrompts = [{
   id: 1,
   title: "Customer Support Bot",
@@ -98,32 +96,35 @@ const Playground = () => {
         </div>
       </aside>
 
-      {/* Center Panel - Editor */}
-      <main className="flex-1 flex flex-col min-w-0">
-        {/* Editor Header */}
-        <header className="h-14 border-b border-white/5 flex items-center justify-between px-6">
-          <input type="text" value={promptTitle} onChange={e => setPromptTitle(e.target.value)} className="bg-transparent text-lg font-medium text-white border-none outline-none focus:ring-0 placeholder:text-zinc-600" placeholder="Untitled Prompt" />
-          <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-white hover:bg-white/5">
-            <Save className="w-4 h-4 mr-2" />
-            Save
-          </Button>
-        </header>
+      {/* Resizable Main Content */}
+      <ResizablePanelGroup direction="horizontal" className="flex-1">
+        {/* Center Panel - Editor */}
+        <ResizablePanel defaultSize={60} minSize={40}>
+          <main className="h-full flex flex-col min-w-0">
+            {/* Editor Header */}
+            <header className="h-14 border-b border-white/5 flex items-center justify-between px-6">
+              <input type="text" value={promptTitle} onChange={e => setPromptTitle(e.target.value)} className="bg-transparent text-lg font-medium text-white border-none outline-none focus:ring-0 placeholder:text-zinc-600" placeholder="Untitled Prompt" />
+              <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-white hover:bg-white/5">
+                <Save className="w-4 h-4 mr-2" />
+                Save
+              </Button>
+            </header>
 
-        {/* Editor Body */}
-        <div className="flex-1 flex flex-col p-6 overflow-hidden">
-          <div className="flex-1 bg-zinc-900/50 rounded-xl border border-white/5 flex overflow-hidden">
-            {/* Line Numbers */}
-            <div className="w-12 bg-zinc-900/80 border-r border-white/5 py-4 select-none flex-shrink-0">
-              <div className="flex flex-col items-end pr-3">
-                {lines.map(line => <span key={line} className="text-xs font-mono text-zinc-600 leading-6">
-                    {line}
-                  </span>)}
-              </div>
-            </div>
+            {/* Editor Body */}
+            <div className="flex-1 flex flex-col p-6 overflow-hidden">
+              <div className="flex-1 bg-zinc-900/50 rounded-xl border border-white/5 flex overflow-hidden">
+                {/* Line Numbers */}
+                <div className="w-12 bg-zinc-900/80 border-r border-white/5 py-4 select-none flex-shrink-0">
+                  <div className="flex flex-col items-end pr-3">
+                    {lines.map(line => <span key={line} className="text-xs font-mono text-zinc-600 leading-6">
+                        {line}
+                      </span>)}
+                  </div>
+                </div>
 
-            {/* Text Area */}
-            <div className="flex-1 overflow-auto">
-              <textarea value={promptContent} onChange={e => setPromptContent(e.target.value)} className="w-full h-full min-h-full bg-transparent text-zinc-300 font-mono text-base leading-6 p-4 resize-none outline-none placeholder:text-zinc-600 focus:ring-0" placeholder={`You are a helpful AI assistant. Your goal is to...
+                {/* Text Area */}
+                <div className="flex-1 overflow-auto">
+                  <textarea value={promptContent} onChange={e => setPromptContent(e.target.value)} className="w-full h-full min-h-full bg-transparent text-zinc-300 font-mono text-base leading-6 p-4 resize-none outline-none placeholder:text-zinc-600 focus:ring-0" placeholder={`You are a helpful AI assistant. Your goal is to...
 
 # Context
 - You will receive user queries about [topic]
@@ -138,54 +139,61 @@ const Playground = () => {
 # Variables
 - User: {{user_name}}
 - Input: {{input_data}}`} spellCheck={false} />
-            </div>
-          </div>
-
-          {/* Action Bar */}
-          <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-mono text-zinc-500">
-                {tokenCount} tokens
-              </span>
-              <span className="text-sm font-mono text-zinc-600">•</span>
-              <span className="text-sm font-mono text-zinc-500">
-                {promptContent.length} chars
-              </span>
-            </div>
-            <Button className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-8 py-2 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300">
-              <Play className="w-4 h-4 mr-2" />
-              Analyze Prompt
-            </Button>
-          </div>
-        </div>
-      </main>
-
-      {/* Right Panel - Improved Prompt Output */}
-      <aside className="w-96 bg-zinc-900/30 border-l border-white/5 flex flex-col">
-        {/* Panel Header */}
-        <header className="h-14 border-b border-white/5 flex items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-sm font-medium text-zinc-300">Improved Prompt</span>
-          </div>
-        </header>
-
-        {/* Improved Prompt Content */}
-        <div className="flex-1 p-4 overflow-auto">
-          <div className="h-full bg-zinc-900/50 rounded-xl border border-white/5 flex flex-col">
-            {/* Empty State */}
-            <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
-              <div className="w-12 h-12 rounded-full bg-zinc-800/50 flex items-center justify-center mb-4">
-                <Sparkles className="w-6 h-6 text-zinc-600" />
+                </div>
               </div>
-              <h3 className="text-sm font-medium text-zinc-400 mb-2">No Analysis Yet</h3>
-              <p className="text-xs text-zinc-600 max-w-[200px]">
-                Write your prompt and click "Analyze Prompt" to get an optimized version here.
-              </p>
+
+              {/* Action Bar */}
+              <div className="mt-4 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className="text-sm font-mono text-zinc-500">
+                    {tokenCount} tokens
+                  </span>
+                  <span className="text-sm font-mono text-zinc-600">•</span>
+                  <span className="text-sm font-mono text-zinc-500">
+                    {promptContent.length} chars
+                  </span>
+                </div>
+                <Button className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-8 py-2 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300">
+                  <Play className="w-4 h-4 mr-2" />
+                  Analyze Prompt
+                </Button>
+              </div>
             </div>
-          </div>
-        </div>
-      </aside>
+          </main>
+        </ResizablePanel>
+
+        {/* Resizable Handle */}
+        <ResizableHandle withHandle className="bg-white/5 hover:bg-purple-500/30 transition-colors" />
+
+        {/* Right Panel - Improved Prompt Output */}
+        <ResizablePanel defaultSize={40} minSize={25}>
+          <aside className="h-full bg-zinc-900/30 flex flex-col">
+            {/* Panel Header */}
+            <header className="h-14 border-b border-white/5 flex items-center justify-between px-4">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-purple-400" />
+                <span className="text-sm font-medium text-zinc-300">Improved Prompt</span>
+              </div>
+            </header>
+
+            {/* Improved Prompt Content */}
+            <div className="flex-1 p-4 overflow-auto">
+              <div className="h-full bg-zinc-900/50 rounded-xl border border-white/5 flex flex-col">
+                {/* Empty State */}
+                <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
+                  <div className="w-12 h-12 rounded-full bg-zinc-800/50 flex items-center justify-center mb-4">
+                    <Sparkles className="w-6 h-6 text-zinc-600" />
+                  </div>
+                  <h3 className="text-sm font-medium text-zinc-400 mb-2">No Analysis Yet</h3>
+                  <p className="text-xs text-zinc-600 max-w-[200px]">
+                    Write your prompt and click "Analyze Prompt" to get an optimized version here.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>;
 };
 export default Playground;
