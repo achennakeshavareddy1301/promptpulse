@@ -32,9 +32,72 @@ const Footer = () => {
     { name: "LinkedIn", icon: Linkedin, href: "#" },
   ];
 
+  // Floating particles configuration
+  const particles = [
+    { size: 4, x: '10%', y: '20%', duration: 8, delay: 0 },
+    { size: 6, x: '25%', y: '60%', duration: 12, delay: 2 },
+    { size: 3, x: '40%', y: '30%', duration: 10, delay: 1 },
+    { size: 5, x: '60%', y: '70%', duration: 9, delay: 3 },
+    { size: 4, x: '75%', y: '25%', duration: 11, delay: 0.5 },
+    { size: 7, x: '85%', y: '50%', duration: 13, delay: 2.5 },
+    { size: 3, x: '15%', y: '80%', duration: 7, delay: 1.5 },
+    { size: 5, x: '50%', y: '15%', duration: 14, delay: 4 },
+    { size: 4, x: '90%', y: '85%', duration: 10, delay: 3.5 },
+    { size: 6, x: '5%', y: '45%', duration: 8, delay: 1 },
+  ];
+
   return (
-    <footer id="docs" className="border-t border-white/5 bg-card/30">
-      <div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">
+    <footer id="docs" className="relative border-t border-white/5 bg-card/30 overflow-hidden">
+      {/* Floating Particles Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        {particles.map((particle, index) => (
+          <div
+            key={index}
+            className="absolute rounded-full bg-primary/20 animate-float"
+            style={{
+              width: particle.size,
+              height: particle.size,
+              left: particle.x,
+              top: particle.y,
+              animationDuration: `${particle.duration}s`,
+              animationDelay: `${particle.delay}s`,
+            }}
+          />
+        ))}
+        
+        {/* Glowing orbs */}
+        <div 
+          className="absolute w-32 h-32 rounded-full opacity-10 animate-pulse-glow"
+          style={{
+            background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
+            left: '20%',
+            top: '30%',
+            filter: 'blur(40px)',
+          }}
+        />
+        <div 
+          className="absolute w-24 h-24 rounded-full opacity-10 animate-pulse-glow"
+          style={{
+            background: 'radial-gradient(circle, hsl(var(--accent)) 0%, transparent 70%)',
+            right: '15%',
+            bottom: '20%',
+            filter: 'blur(30px)',
+            animationDelay: '1s',
+          }}
+        />
+        <div 
+          className="absolute w-20 h-20 rounded-full opacity-5 animate-pulse-glow"
+          style={{
+            background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
+            left: '60%',
+            top: '60%',
+            filter: 'blur(25px)',
+            animationDelay: '2s',
+          }}
+        />
+      </div>
+      
+      <div className="container relative mx-auto px-4 sm:px-6 py-12 md:py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="col-span-2">
